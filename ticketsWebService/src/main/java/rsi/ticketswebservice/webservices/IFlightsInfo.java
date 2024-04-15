@@ -31,5 +31,5 @@ public interface IFlightsInfo {
     List<TicketDto> getTickets();
 
     @WebMethod
-    TicketDto getBookingConfirmation(String ticketId);
+    TicketDto getTicket(String ticketId);
 }
