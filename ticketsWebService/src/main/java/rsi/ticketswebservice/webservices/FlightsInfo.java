@@ -61,7 +61,12 @@ public class FlightsInfo implements IFlightsInfo {
     }
 
     @Override
-    public TicketDto checkReservation(String ticketId) {
+    public List<TicketDto> getTickets() {
+        return repository.getTickets().stream().map(Ticket::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public TicketDto getBookingConfirmation(String ticketId) {
         return repository.getTickets().stream()
                 .filter(ticket -> ticket.getId().toString().startsWith(ticketId))
                 .findFirst()

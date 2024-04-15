@@ -28,5 +28,8 @@ public interface IFlightsInfo {
     List<CityDto> getCities();
 
     @WebMethod
-    TicketDto checkReservation(String ticketId);
+    List<TicketDto> getTickets();
+
+    @WebMethod
+    TicketDto getBookingConfirmation(String ticketId);
 }

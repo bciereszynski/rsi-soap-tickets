@@ -1,5 +1,6 @@
 package rsi.ticketswebservice.webservices;
 
+import rsi.ticketswebservice.dto.TicketDto;
 import rsi.ticketswebservice.entities.Flight;
 import rsi.ticketswebservice.entities.Ticket;
 import rsi.ticketswebservice.services.PdfService;
@@ -21,21 +22,22 @@ public class FlightsService implements IFlightsService{
     Repository repository = Repository.getInstance();
 
     @Override
-    public boolean bookFlight(String flightId, String passengerFirstName, String passengerSurname) {
+    public TicketDto bookFlight(String flightId, String passengerFirstName, String passengerSurname) {
         try {
             UUID id = UUID.fromString(flightId);
             Flight flight = repository.getFlights().stream().filter(f -> f.getId().equals(id)).findFirst().orElse(null);
             if (flight == null) {
-                return false;
+                return null;
             }
             if(flight.tryReserveSeat()){
-                repository.addTicket(new Ticket(flight, passengerFirstName, passengerSurname));
-                return true;
+                Ticket ticket = new Ticket(flight, passengerFirstName, passengerSurname);
+                repository.addTicket(ticket);
+                return ticket.toDto();
             }
-            return false;
+            return null;
         } catch (IllegalArgumentException e) {
             LOGGER.warning("Invalid UUID format");
-            return false;
+            return null;
         }
     }
 
