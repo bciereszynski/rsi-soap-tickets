@@ -1,5 +1,9 @@
+from zeep import Client
+
 class FlightsRepository:
     def __init__(self):
-        pass
+        self.client = Client('http://localhost:8080/ticketsWebService-1.0/FlightsInfoService?wsdl')
+
     def List(self):
-        return ['ala', 'bela']
+        result = self.client.service.getFlights()
+        return result
