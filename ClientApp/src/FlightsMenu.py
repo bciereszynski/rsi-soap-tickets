@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QListWidget, QVBoxLayout, QWidget, QDialog
+from PyQt5.QtWidgets import QListWidget, QVBoxLayout, QWidget, QDialog, QHBoxLayout, QLineEdit, QPushButton
 
 from src.TicketInfoDialog import TicketInfoDialog
 from src.models.Ticket import Ticket
@@ -18,9 +18,27 @@ class FlightsMenu(QWidget):
         self.itemsWidget = QListWidget()
         self.updateItems()
 
+        filterLay = QHBoxLayout()
+        self.fromFilter = QLineEdit()
+        self.fromFilter.setPlaceholderText("From")
+        filterLay.addWidget(self.fromFilter)
+        self.toFilter = QLineEdit()
+        self.toFilter.setPlaceholderText("To")
+        filterLay.addWidget(self.toFilter)
+
+        filterButton = QPushButton("Filter")
+        filterButton.clicked.connect(self.filter)
+        filterLay.addWidget(filterButton)
+
+        self.lay.addLayout(filterLay)
         self.lay.addWidget(self.itemsWidget)
 
         self.itemsWidget.itemDoubleClicked.connect(self.editCommand)
+
+    def filter(self):
+        fromPlace = self.fromFilter.text() if self.fromFilter.text() != "" else None
+        toPlace = self.toFilter.text() if self.toFilter.text() != "" else None
+        self.itemsList.fetch(fromPlace, toPlace)
 
     def selectedIndex(self):
         if len(self.itemsWidget.selectedIndexes()) == 0:

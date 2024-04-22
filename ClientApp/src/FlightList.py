@@ -12,8 +12,9 @@ class FlightsList(QObject):
         self.repository = repository
         self.fetch()
 
-    def fetch(self):
-        self.items = self.repository.List()
+    def fetch(self, formPlace=None, toPlace=None):
+        self.items = self.repository.List(formPlace, toPlace)
+
         self.listChanged.emit()
 
     def getItems(self):
