@@ -5,6 +5,7 @@ import rsi.ticketswebservice.entities.Flight;
 import rsi.ticketswebservice.entities.Ticket;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -53,7 +54,7 @@ public class Repository implements IRepository {
             new Flight(cities.get(5), cities.get(3), randomFutureTime(), 12)
     );
 
-    private final List<Ticket> tickets = Arrays.asList(
+    private final List<Ticket> tickets = new ArrayList<>(Arrays.asList(
             new Ticket(flights.get(0), "John", "Doe"),
             new Ticket(flights.get(0), "Jane", "Doe"),
             new Ticket(flights.get(0), "Alice", "Smith"),
@@ -62,7 +63,7 @@ public class Repository implements IRepository {
             new Ticket(flights.get(5), "David", "Brown"),
             new Ticket(flights.get(6), "Eve", "White"),
             new Ticket(flights.get(7), "Frank", "White")
-    );
+    ));
 
     @Override
     public List<City> getCities() {
