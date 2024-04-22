@@ -26,9 +26,8 @@ class FlightsMenu(QWidget):
         self.toFilter.setPlaceholderText("To")
         filterLay.addWidget(self.toFilter)
 
-        filterButton = QPushButton("Filter")
-        filterButton.clicked.connect(self.filter)
-        filterLay.addWidget(filterButton)
+        self.fromFilter.textChanged.connect(self.filter)
+        self.toFilter.textChanged.connect(self.filter)
 
         self.lay.addLayout(filterLay)
         self.lay.addWidget(self.itemsWidget)
