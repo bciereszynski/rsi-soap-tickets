@@ -39,8 +39,6 @@ class TicketBuyDialog(QDialog):
         print(result)
         self.close()
 
-    def setFlightStr(self, name):
-        self.ticketLabel.setText(name)
-
-    def setFlightId(self, identifier):
-        self.flightId = identifier
+    def setFlight(self, flight):
+        self.flight = flight
+        self.ticketLabel.setText(str(flight))
