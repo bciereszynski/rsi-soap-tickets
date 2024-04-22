@@ -9,11 +9,10 @@ class Flight:
         self.id = flightDto["id"]
 
     def __str__(self):
-        name = self._formatCityName(self.departureCity)
-        name = name + " ➡️ "
-        name = name + self._formatCityName(self.arrivalCity)
-        name = name + " " + self._formatDate(self.dateTime)
-        return name
+        departure_city = self._formatCityName(self.departureCity).ljust(22)
+        arrival_city = self._formatCityName(self.arrivalCity).ljust(22)
+        date_time = self._formatDate(self.dateTime).ljust(20)
+        return f"🛫 {departure_city} ➡️ {arrival_city} ⌚ {date_time}"
 
     def _formatCityName(self, city):
         name = city['country'] + ' : ' + city['name']

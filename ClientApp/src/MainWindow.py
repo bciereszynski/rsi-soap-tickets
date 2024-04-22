@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QWidget
 
 from src.FlightList import FlightsList
@@ -11,8 +12,9 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Tickets App')
-        self.window_width, self.window_height = 600, 300
+        self.window_width, self.window_height = 900, 600
         self.setMinimumSize(self.window_width, self.window_height)
+        self.setWindowIcon(QIcon('src/skull.png'))
 
         lay = QHBoxLayout()
         widget = QWidget()
