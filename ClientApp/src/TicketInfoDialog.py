@@ -47,7 +47,7 @@ class TicketInfoDialog(QDialog):
         self.ticketIdLabel.setText(str(ticket.id))
 
     def downloadPdf(self):
-        fileName = QFileDialog.getSaveFileName(self, 'Save PDF', '', 'PDF files (*.pdf)')[0]
+        fileName = QFileDialog.getSaveFileName(self, 'Save PDF', 'untitled.pdf', 'PDF files (*.pdf)')[0]
         if fileName == '':
             return
         client = Client(Config.server + '/ticketsWebService-1.0/FlightsServiceService?wsdl')
