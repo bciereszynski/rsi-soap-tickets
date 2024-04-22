@@ -26,8 +26,8 @@ public class FlightsInfo implements IFlightsInfo {
     public List<FlightDto> getFlightsFrom(String query) {
         return repository.getFlights()
                 .stream()
-                .filter(flight -> flight.getDepartureCity().getName().startsWith(query) ||
-                        flight.getDepartureCity().getCountry().startsWith(query))
+                .filter(flight -> flight.getDepartureCity().getName().toUpperCase().startsWith(query.toUpperCase()) ||
+                        flight.getDepartureCity().getCountry().toUpperCase().startsWith(query.toUpperCase()))
                 .map(Flight::toDto)
                 .collect(Collectors.toList());
     }
@@ -36,8 +36,8 @@ public class FlightsInfo implements IFlightsInfo {
     public List<FlightDto> getFlightsTo(String query) {
         return repository.getFlights()
                 .stream()
-                .filter(flight -> flight.getArrivalCity().getName().startsWith(query) ||
-                        flight.getArrivalCity().getCountry().startsWith(query))
+                .filter(flight -> flight.getArrivalCity().getName().toUpperCase().startsWith(query.toUpperCase()) ||
+                        flight.getArrivalCity().getCountry().toUpperCase().startsWith(query.toUpperCase()))
                 .map(Flight::toDto)
                 .collect(Collectors.toList());
     }
@@ -47,10 +47,10 @@ public class FlightsInfo implements IFlightsInfo {
         return repository.getFlights()
                 .stream()
                 .filter(flight ->
-                        (flight.getDepartureCity().getName().startsWith(queryFrom) ||
-                                flight.getDepartureCity().getCountry().startsWith(queryFrom)) &&
-                                (flight.getArrivalCity().getName().startsWith(queryTo) ||
-                                        flight.getArrivalCity().getCountry().startsWith(queryTo)))
+                        (flight.getDepartureCity().getName().toUpperCase().startsWith(queryFrom.toUpperCase()) ||
+                                flight.getDepartureCity().getCountry().toUpperCase().startsWith(queryFrom.toUpperCase())) &&
+                                (flight.getArrivalCity().getName().toUpperCase().startsWith(queryTo.toUpperCase()) ||
+                                        flight.getArrivalCity().getCountry().toUpperCase().startsWith(queryTo.toUpperCase())))
                 .map(Flight::toDto)
                 .collect(Collectors.toList());
     }
