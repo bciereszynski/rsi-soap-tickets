@@ -2,6 +2,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QFrame, QLineEdit, QPushButton, QFileDialog
 from zeep import Client
 
+from src.Config import Config
+
 
 class TicketInfoDialog(QDialog):
     def __init__(self):
@@ -48,8 +50,8 @@ class TicketInfoDialog(QDialog):
         fileName = QFileDialog.getSaveFileName(self, 'Save PDF', '', 'PDF files (*.pdf)')[0]
         if fileName == '':
             return
-        self.client = Client('http://localhost:8080/ticketsWebService-1.0/FlightsServiceService?wsdl')
-        result = self.client.service.getBookingConfirmation(self.ticket.id)
+        client = Client(Config.config + '/ticketsWebService-1.0/FlightsServiceService?wsdl')
+        result = client.service.getBookingConfirmation(self.ticket.id)
 
         with open(fileName, 'wb') as f:
             f.write(result)
