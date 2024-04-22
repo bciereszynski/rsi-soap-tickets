@@ -38,7 +38,6 @@ class FlightsMenu(QWidget):
         self.itemDialog.setFlight(item)
         self.itemDialog.exec_()
 
-        if self.itemDialog.result() == QDialog.Rejected:
-            return
-
-        item = self.itemDialog.getItem()
+        result = self.itemDialog.getResult()
+        if result is not None:
+            print(result)

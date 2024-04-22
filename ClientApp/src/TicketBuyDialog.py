@@ -9,7 +9,8 @@ class TicketBuyDialog(QDialog):
         self.lay = QVBoxLayout()
         self.setWindowModality(Qt.ApplicationModal)
         self.ticketLabel = QLabel("...")
-        self.flightId = None
+        self.flight = None
+        self.result = None
         self.lay.addWidget(self.ticketLabel)
 
         line = QFrame()
@@ -35,10 +36,13 @@ class TicketBuyDialog(QDialog):
         self.client = Client('http://localhost:8080/ticketsWebService-1.0/FlightsServiceService?wsdl')
         name = self.nameEdit.text()
         surname = self.surnameEdit.text()
-        result = self.client.service.bookFlight(self.flightId, name, surname)
-        print(result)
+        self.result = self.client.service.bookFlight(self.flight.id, name, surname)
         self.close()
 
+    def getResult(self):
+        return self.result
+
     def setFlight(self, flight):
+        self.result = None
         self.flight = flight
         self.ticketLabel.setText(str(flight))
