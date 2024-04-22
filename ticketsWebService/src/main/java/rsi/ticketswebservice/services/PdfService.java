@@ -28,8 +28,6 @@ public class PdfService {
                 contentStream.newLineAtOffset(0, -30);
                 contentStream.showText("Passenger: " + ticket.getPassengerFirstName() + " " + ticket.getPassengerSurname());
                 contentStream.newLineAtOffset(0, -30);
-                contentStream.showText("Flight ID: " + ticket.getFlight().getId());
-                contentStream.newLineAtOffset(0, -30);
                 contentStream.showText("Departure City: " + ticket.getFlight().getDepartureCity().getName());
                 contentStream.newLineAtOffset(0, -30);
                 contentStream.showText("Arrival City: " + ticket.getFlight().getArrivalCity().getName());
