@@ -1,3 +1,7 @@
+import os
+from dotenv import load_dotenv
+
 class Config:
-    with open('config.txt', 'r') as f:
-        config = f.read()
+    load_dotenv()
+
+    server = os.getenv('SERVER')
