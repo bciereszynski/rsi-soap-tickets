@@ -1,8 +1,7 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QVBoxLayout, QLabel, QPushButton, QFrame, QLineEdit
-from zeep import Client
+from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QFrame, QLineEdit
 
-from src.Config import Config
+from src.WSClientBuilder import WSClientBuilder
 
 
 class TicketBuyDialog(QDialog):
@@ -35,7 +34,7 @@ class TicketBuyDialog(QDialog):
         self.setLayout(self.lay)
 
     def buyFlight(self):
-        self.client = Client(Config.server + '/ticketsWebService-1.0/FlightsServiceService?wsdl')
+        self.client = WSClientBuilder.getClient('/ticketsWebService-1.0/FlightsServiceService?wsdl')
         name = self.nameEdit.text()
         surname = self.surnameEdit.text()
         self.result = self.client.service.bookFlight(self.flight.id, name, surname)
