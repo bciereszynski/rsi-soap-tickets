@@ -1,5 +1,9 @@
 from PyQt5.QtWidgets import QListWidget, QVBoxLayout, QWidget, QDialog
 
+from src.TicketInfoDialog import TicketInfoDialog
+from src.models.Ticket import Ticket
+
+
 class FlightsMenu(QWidget):
     def __init__(self, itemsList, itemDialog, parent=None):
         super().__init__(parent)
@@ -7,6 +11,7 @@ class FlightsMenu(QWidget):
         self.setLayout(self.lay)
 
         self.itemDialog = itemDialog
+        self.confirmationDialog = TicketInfoDialog()
         self.itemsList = itemsList
         self.itemsList.listChanged.connect(self.updateItems)
 
@@ -40,4 +45,6 @@ class FlightsMenu(QWidget):
 
         result = self.itemDialog.getResult()
         if result is not None:
-            print(result)
+            ticket = Ticket(result)
+            self.confirmationDialog.setTicket(ticket)
+            self.confirmationDialog.exec_()
