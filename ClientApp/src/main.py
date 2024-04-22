@@ -1,6 +1,7 @@
 # This is a sample Python script.
 import sys
 
+from PyQt5.QtGui import QFont
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
@@ -12,6 +13,7 @@ from src.MainWindow import MainWindow
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyle('Breeze')
+    app.setFont(QFont("Comic Sans MS", 12))
 
     window = MainWindow()
     window.show()
