@@ -10,7 +10,7 @@ class Flight:
 
     def __str__(self):
         name = self._formatCityName(self.departureCity)
-        name = name + " ==> "
+        name = name + " ➡️ "
         name = name + self._formatCityName(self.arrivalCity)
         name = name + " " + self._formatDate(self.dateTime)
         return name
