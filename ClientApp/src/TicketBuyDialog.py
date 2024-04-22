@@ -34,7 +34,7 @@ class TicketBuyDialog(QDialog):
         self.setLayout(self.lay)
 
     def buyFlight(self):
-        self.client = WSClientBuilder.getClient('/ticketsWebService-1.0/FlightsServiceService?wsdl')
+        self.client = WSClientBuilder.getClientSSL('/ticketsWebService-1.0/FlightsServiceService?wsdl')
         name = self.nameEdit.text()
         surname = self.surnameEdit.text()
         self.result = self.client.service.bookFlight(self.flight.id, name, surname)

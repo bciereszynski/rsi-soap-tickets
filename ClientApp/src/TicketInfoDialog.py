@@ -49,7 +49,7 @@ class TicketInfoDialog(QDialog):
         fileName = QFileDialog.getSaveFileName(self, 'Save PDF', 'untitled.pdf', 'PDF files (*.pdf)')[0]
         if fileName == '':
             return
-        client = WSClientBuilder.getClient('/ticketsWebService-1.0/FlightsServiceService?wsdl')
+        client = WSClientBuilder.getClientSSL('/ticketsWebService-1.0/FlightsServiceService?wsdl')
         result = client.service.getBookingConfirmation(self.ticket.id)
 
         with open(fileName, 'wb') as f:
