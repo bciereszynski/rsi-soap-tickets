@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QListWidget, QVBoxLayout, QWidget, QDialog, QHBoxLayout, QLineEdit, QPushButton
 
+from src.CheckReservationDialog import CheckReservationDialog
 from src.TicketInfoDialog import TicketInfoDialog
 from src.models.Ticket import Ticket
 
@@ -32,6 +33,10 @@ class FlightsMenu(QWidget):
         self.lay.addLayout(filterLay)
         self.lay.addWidget(self.itemsWidget)
 
+        checkButton = QPushButton("Check Reservation")
+        checkButton.clicked.connect(self.checkReservationAction)
+        self.lay.addWidget(checkButton)
+
         self.itemsWidget.itemDoubleClicked.connect(self.editCommand)
 
     def filter(self):
@@ -59,6 +64,16 @@ class FlightsMenu(QWidget):
         item = self.itemsList.getItem(itemToEditRow)
         self.itemDialog.setFlight(item)
         self.itemDialog.exec_()
+
+        result = self.itemDialog.getResult()
+        if result is not None:
+            ticket = Ticket(result)
+            self.confirmationDialog.setTicket(ticket)
+            self.confirmationDialog.exec_()
+
+    def checkReservationAction(self):
+        dialog = CheckReservationDialog()
+        dialog.exec_()
 
         result = self.itemDialog.getResult()
         if result is not None:
