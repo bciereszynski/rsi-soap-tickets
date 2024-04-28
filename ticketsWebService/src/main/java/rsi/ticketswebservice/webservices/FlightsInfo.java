@@ -8,11 +8,13 @@ import rsi.ticketswebservice.entities.Flight;
 import rsi.ticketswebservice.entities.Ticket;
 import rsi.ticketswebservice.services.Repository;
 
+import javax.jws.HandlerChain;
 import javax.jws.WebService;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @WebService
+@HandlerChain(file="handler-chain.xml")
 public class FlightsInfo implements IFlightsInfo {
 
     private final Repository repository = Repository.getInstance();
