@@ -6,3 +6,4 @@ class Config:
 
     server = os.getenv('SERVER')
     server_ssl = os.getenv('SERVER_SSL')
+    api_key = os.getenv('API_KEY')
